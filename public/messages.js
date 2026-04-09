@@ -129,11 +129,11 @@ async function startChatFromPost(otherUserId) {
 //-------------------------------- LOAD CHAT LIST ---------------------------
 async function loadChatList() {
 
-    const left = document.getElementById("leftPannel");
+    const chatList = document.getElementById("chatList");
 
     onValue(ref(db, "conversations"), async (snapshot) => {
 
-        left.innerHTML = "";
+        chatList.innerHTML = "";
 
         const data = snapshot.val();
 
