@@ -138,7 +138,10 @@ async function loadChatList() {
         const data = snapshot.val();
 
         if (!data) {
-            left.innerHTML = "No chats yet";
+            chatList.style.color = "white";
+            chatList.style.marginTop = "20px";
+             chatList.style.marginLeft = "20px";
+            chatList.innerHTML = "No chats yet";
             return;
         }
 
@@ -188,7 +191,7 @@ async function loadChatList() {
                 openChatUI(chat.otherUser);
             };
 
-            left.appendChild(div);
+            chatList.appendChild(div);
         }
     });
 }
