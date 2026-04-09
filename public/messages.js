@@ -85,7 +85,7 @@ function setupMessageContainer() {
 
         const inputForm = document.getElementById("chatInputForm");
         right.insertBefore(msgBox, inputForm);
-    }
+    }  //---------------------------------------------------------- not needed
 }
 
 //-------------------------------- CREATE / FIND CHAT ---------------------------

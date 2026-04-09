@@ -38,7 +38,6 @@ onAuthStateChanged(auth, (user) => {
         container.innerHTML = "Please login";
     }
 });
-
 //--------------------------------------- LOAD POSTS ---------------------------
 function loadPosts() {
     const postsRef = ref(db, "posts");
@@ -54,7 +53,6 @@ function loadPosts() {
         }
     });
 }
-
 //--------------------------------------- DISPLAY POSTS ---------------------------
 function displayPosts(data) {
 
@@ -101,7 +99,6 @@ function displayPosts(data) {
             menuBox.style.display =
                 menuBox.style.display === "flex" ? "none" : "flex";
         });
-
         // RETURN BUTTON
         const returnBtn = postDiv.querySelector(".deleteButton");
 
