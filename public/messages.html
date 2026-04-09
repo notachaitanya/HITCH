@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hitch</title>
+    <link rel="stylesheet" href="Hitch_styles.css">
+</head>
+
+<body id="messagebody">
+
+<header id="mh">
+    <div id="Hinfotext">Messages</div>
+    <img id="kllogo" src="images/KLH_Logo.png">
+</header>
+
+<!-- NAV -->
+<div id="navbackground">
+    <div id="iconpack">
+        <a href="home.html"><img class="navicon" src="images/home.svg"></a>
+        <a href="uploadPage.html"><img class="navicon" src="images/plus.svg"></a>
+        <a href="messages.html"><img class="navicon" src="images/message.svg"></a>
+        <a href="profilePage.html"><img id="profileicon" src="images/profile.svg"></a>
+    </div>
+</div>
+<!-- MAIN CHAT UI -->
+<div id="wrapper">
+    <div id="leftPannel"></div>
+    <div id="rightPannel">
+        <div id="chatUploaderUidDisplay"></div>
+        <form id="chatInputForm">
+        <div id="MessageInputSpace">
+            <input id="messageInput" placeholder="message..">
+        </div>
+        </form>
+    </div>
+</div>
+
+<script type="module" src="messages.js"></script>
+
+</body>
+</html>

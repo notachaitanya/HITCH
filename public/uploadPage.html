@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hitch</title>
+    <link rel="stylesheet" type="text/css" href="Hitch_styles.css">
+</head>
+<body id="uploadbody">
+    <header>
+        <div id="Hinfotext">Upload</div>
+        <img id="kllogo" src="images/KLH_Logo.png">
+    </header>
+    <!-- navigation -->
+    <div id="navbackground">
+        <div id="iconpack">
+           <a href="home.html" title="home"> <img id="homeicon" class="navicon" src="images/home.svg"></a>
+           <a href="uploadPage.html" title="upload"><img id="uploadicon" class="navicon" src="images/plus.svg"></a>
+           <a href="messages.html" title="messages"><img id="messageicon" class="navicon" src="images/message.svg"></a>
+           <a href="profilePage.html" title="profile"><img id="profileicon" src="images/profile.svg"></a>
+        </div>
+    </div>
+    <!-- navigation -->
+     
+     <div id="uploadSpace">
+        <p id="statusText"></p>
+        <label id="dragdropsection">
+            <input type="file" id="fileInput" accept="image/*" hidden>
+            <div id="image-preview">
+                <img id="dropsectionicon" src="images/uploadicon.png">
+                <p id="dropspacetext">Left click to open fileManager or drag & drop the image</p>
+            </div>
+        </label>
+        
+        <input type="text" id="location" placeholder='Found at: ' required>
+        <select class="category" id="category">
+            <option value="">Select Category</option>
+            <option value="mobile">Mobile</option>
+            <option value="earphones">Earphones</option>
+            <option value="laptop">Laptop</option>
+            <option value="charger">Charger</option>
+            <option value="Other">Other</option>
+        </select>
+        <button id="imageuploadbutton">Upload</button>
+     </div>
+     <script type="module" src="uploadPage.js"></script>
+</body>
+
+</html>

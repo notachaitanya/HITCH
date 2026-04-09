@@ -1,0 +1,687 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    background-image:linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), url("images/hitch_background.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    margin: 0;
+}
+/* login */
+#Lbody
+{
+    background-color: black;
+    display : flex;
+    flex-direction: column;
+    justify-content : center;
+    align-items : center;
+    justify-content: center;
+}
+
+#logoSpacer{
+    display:flex;
+    
+    align-items: center;
+    
+    width:100%;
+    justify-content: center;
+}
+#Loginlogo
+{  
+    width: 250px;
+    height: auto;
+}
+
+#klhLogo{
+    width: 180px;
+    height: auto;
+    margin-right: 50px;
+    margin-left: 20px;
+    margin-bottom:15px;
+}
+#x{
+    width: 40px;
+    height: 40px;
+    opacity: 0.5;
+    margin-left: 5px;
+}
+
+#username
+{
+    
+    margin-top: 50px;
+    width:100%;
+    height : auto;
+    max-width: 700px;
+    border-radius: 20px;
+    padding: 10px 15px;
+    font-size: 14px;
+    border: 2px solid purple;
+    background-color: darkgray;
+    
+}
+
+.Linput
+{
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 16px;
+}
+
+#username{
+    margin-top: 30px;
+}
+
+#password
+{
+    
+    margin-top: 30px;
+    width:100%;
+    height : auto;
+    max-width: 700px;
+    border-radius: 20px;
+    padding: 10px 15px;
+    font-size: 14px;
+    border: 2px solid purple;
+    background-color: darkgray;
+    
+}
+
+#logbutton
+{
+    width : 100px;
+    height: 42px;
+    border-radius: 20px;
+    background-color: purple;
+    margin-top: 50px;
+    cursor: pointer;
+    font-size: 18px;
+    border: none;
+}
+#logbutton:hover
+{
+    background-color: grey;
+    box-shadow: purple 0px 0px 50px 5px;
+}
+
+#Ltext
+{
+    color: rgba(249, 93, 93, 0.8);
+    margin-top: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#Lform {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#signuplink{
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 30px;
+    font-size: 15px;
+    color: purple;
+    background-color: black;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: 2px solid purple;
+}
+.caution{
+    color:red;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8px;
+}
+#cautionSpacer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    margin-top: 50px;
+    margin-bottom:-100px;
+}
+/* login */
+/* -------------------------------------------------------------------------------------------------------------------------------------------- */
+/* -------------------------------------------signup------------------------------------------------------------------------------------------- */
+#Sbody{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#signuplogo{
+    margin-bottom: 10px;
+    width:150px
+}
+#signupbackgroundblur{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+    
+   
+    width:600px;
+    height:auto;
+    padding-top: 50px;
+    padding-bottom: 30px;
+    padding-left: 50px;
+    padding-right: 50px;
+    border-radius: 20px;
+    background-color:rgba(191, 191, 191, 0.1);
+    backdrop-filter: blur(3px);
+    box-shadow: 0px 0px 10px rgba(255, 255, 255,0.5);
+}
+#Sform{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#Signup-username{
+     margin-top: 30px;
+    width:100%;
+    height : auto;
+    max-width: 700px;
+    border-radius: 20px;
+    padding: 10px 15px;
+    font-size: 14px;
+    border: 2px solid purple;
+    background-color: darkgray;
+}
+#Signup-password{
+    margin-top: 30px;
+    width:100%;
+    height : auto;
+    max-width: 700px;
+    border-radius: 20px;
+    padding: 10px 15px;
+    font-size: 14px;
+    border: 2px solid purple;
+    background-color: darkgray;
+}
+#SignupButton{
+    width : 100px;
+    height: 42px;
+    border-radius: 20px;
+    background-color: purple;
+    margin-top: 50px;
+    cursor: pointer;
+    font-size: 18px;
+    border: none;
+}
+#SignupButton:hover{
+     background-color: grey;
+    box-shadow: purple 0px 0px 50px 5px;
+}
+
+#googleLogin{
+    margin-top: 30px;
+    height:30px;
+    width: 50px;
+    border-radius:5px;
+    border: 2px purple solid;
+}
+/* -------------------------------------------/signup------------------------------------------------------------------------------------------- */
+/* navigation bar */
+#navbackground
+{
+    width:50px;
+    height:245px;
+    margin-left: auto;
+    margin-right: 20px;
+    margin-top: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    box-shadow: 0px 0px 10px rgba(255, 255, 255,0.5);
+    flex-shrink: 0;
+}
+
+#iconpack
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    
+}
+.navicon
+{
+    width:30px;
+    margin-bottom: auto;
+    margin-top: 20px;
+    cursor: pointer;
+}
+#profileicon
+{
+    width: 35px;
+    margin-top: 8px;
+}
+/* navigation bar */
+/* ------------------------------------------------------------------------------------------------------------------------------------------- */
+/* home */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#Hbody {
+    
+    height: 100vh;              
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow: hidden;           
+}
+
+
+
+header {
+    height: 80px;              
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    gap: 40px;
+    width: 100%;
+}
+
+#Hinfotext {
+    color: purple;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#searchbar {
+    width: 100%;
+    max-width: 900px;
+    border-radius: 20px;
+    padding: 10px 15px;
+    font-size: 14px;
+    border: 2px solid purple;
+    background-color: darkgray;
+}
+
+#searchbar:focus {
+    outline: none;
+    box-shadow: purple 0px 0px 10px 2px;
+}
+
+#kllogo {
+    width: 80px;
+}
+
+
+/* SCROLLABLE CARD AREA */
+#cardsspace {
+    
+    flex: 1;                    
+    overflow-y: auto;           
+    padding: 20px;
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
+    margin: -280px auto 0 auto;
+      
+}
+#cardsspace::-webkit-scrollbar {
+    display: none;
+} 
+
+
+/* CARDS */
+.card {
+    background-color: #1e1e1e;
+    color: white;
+    padding: 20px;
+    height: auto;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+}
+.menubutton{
+    margin-left: auto;
+    cursor: pointer;
+}
+.menuBox{
+    display: none;
+    position: absolute;
+    right: 10px;
+    top: 40px;
+    width:150px;
+    height:80px;
+    background:rgb(52,52,52);
+    justify-content:center;
+    align-items:center;
+    border-radius:10px;
+    border:1px purple solid;
+}
+
+
+.deleteButton{
+    border-radius: 10px;
+    background-color: red;
+    height:50px;
+    width:70px;
+    border:none;
+
+}
+
+/* profile page */
+#Pbody
+{
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;  
+
+}
+
+#dp
+{
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background-color: gray;
+    border-width: 4px ;
+    border-style: solid;
+    border-color: rgb(128, 0, 128);
+    margin-top: -185px;
+    background-position: center;
+    background-size: cover;
+}
+#usernameDisplay{
+    color:purple;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 10px;
+
+}
+#parentdisplay
+{
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+}
+#box1
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+    margin-top: 90px;
+    width: 350px;
+    height:200px;
+}
+
+#box2
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+    margin-top: 90px;
+    width: 350px;
+    height:200px;
+}
+
+.lable
+{
+    width: 90px;
+    height: 40px;
+    background-color: black;
+    border-color: purple;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 20px;
+    color: purple;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.displaybox
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 320px;
+    width: 100%;
+    height: 100%;
+    max-height:90px;
+    background-color: purple;
+    border-radius: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 28px;
+}
+#settings
+{
+    margin-top: 5px;
+    height: 30px;
+}
+#settingslink
+{
+    color: rgb(86, 86, 86);
+}
+#settingslink:hover
+{
+    color: purple;
+}
+.lostimg{
+    width:90%;
+    height: auto;
+    margin:5px 5px 0 5px;
+    border-radius: 20px;
+    align-self: center;
+}
+.tag{
+    margin-right: auto;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 20px;
+}
+.lostmessageicon{
+    margin-right:auto ;
+    margin-top: 5px;
+    width:30px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+
+/* profile page */
+/*------------------------------------ messages -------------------------------------*/
+#wrapper{
+    margin: -280px auto 0 auto;
+    display:flex;
+    width:90%;
+    height:89%;
+}
+#leftPannel{
+    
+    background-color: rgb(59, 59, 59);
+    flex: 1.5;
+    border-radius: 10px 0px 0px 10px;
+    font-size: 18px;
+   
+}
+#rightPannel {
+    background-color: rgb(169, 169, 169);
+    flex: 4;
+    border-radius: 0px 10px 10px 0px;
+
+    display: flex;              
+    flex-direction: column;     
+    overflow: hidden;           
+}
+#chatUploaderUidDisplay{
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+
+    font-family: Arial, Helvetica, sans-serif;
+    width:100%;
+    height:70px;
+    background-color:rgb(169, 169, 169);
+    border-width:0px 0px 2px 0px;
+    border-color: black;
+    border-radius: 0px 10px 0px 0px;
+    border-bottom:2px solid black;
+    padding-left:15px;
+    flex-shrink: 0;
+}
+#MessageInputSpace {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-top: 1px solid black;
+    background-color: rgb(169, 169, 169);
+}
+
+#messageInput{
+    width:90%;
+    height:auto;
+    font-size: 14px;
+    border-radius: 15px;
+    padding:10px;
+    border: 2px solid purple;
+    
+}
+
+#messagesContainer {
+    flex: 1;                    
+    overflow-y: auto;           
+    padding: 10px;
+}
+
+/* -----------------------------------messages---------------------------------------- */
+/* ---------------------------------------upload-------------------------------------- */
+#uploadbody{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:flex-start;
+    height: 100vh;
+}
+
+#statusText{
+    color: yellow;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 0px;
+    margin-right: auto;
+}
+
+#uploadSpace{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 700px;
+    width:100%;
+    flex: 1;
+    gap: 30px;
+}
+#dragdropsection
+{
+    background-color: rgb(137, 0, 137,0.8);
+    height:300px;
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    margin-top:-300px ;
+}
+
+#dropsectionicon{
+    height: 100px;
+    width: 100px;
+}
+
+#dropspacetext{
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 20px;
+    opacity: 70%;
+}
+
+#image-preview{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width:95%;
+    height:85%;
+    border-radius: 20px;
+    background-position: center;
+    background-size: cover;
+
+}
+#location{
+    margin-top: 20px;
+    width:100%;
+    height : auto;
+    max-width: 250px;
+    border-radius: 20px;
+    padding: 10px 15px;
+    font-size: 14px;
+    border: 2px solid purple;
+    background-color: darkgray;
+    margin-right: auto;
+    
+    
+}
+#imageuploadbutton{
+    width : 100px;
+    height: 42px;
+    border-radius: 20px;
+    background-color: purple;
+    margin-top: 40px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    border: none;
+}
+
+#imageuploadbutton:hover
+{
+    background-color: grey;
+    box-shadow: purple 0px 0px 50px 5px;
+}
+
+.options{
+    color:white;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.category {
+    width: 200px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid purple;
+    background-color: black;
+    color: purple;
+    margin-right: auto;
+    opacity: 80%;
+}
+/* --------------------------------------/upload-------------------------------------- */
