@@ -16,8 +16,8 @@ from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
   };
 
   // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 const auth = getAuth(app); 
 
 const logbutton = document.getElementById("logbutton");

@@ -263,8 +263,6 @@ function listenMessages() {
             div.style.borderRadius = "10px";
             div.style.maxWidth = "60%";
 
-            const senderName = await getUsername(msg.senderId);
-
             if (msg.senderId === currentUserId) {
                 div.style.background = "purple";
                 div.style.color = "white";

@@ -51,9 +51,9 @@ function loadPoints(userId) {
 
     const userRef = ref(db, `users/${userId}`);
 
-    onValue(userRef, (snapshot) => {
-        if (snapshot.exists()) {
-            const data = snapshot.val();
+    onValue(userRef, (x) => {
+        if (x.exists()) {
+            const data = x.val();
 
             const points = data.points || 0;
 

@@ -38,14 +38,14 @@ const usernameInput = document.getElementById("username");
 const submit = document.getElementById("SignupButton");
 
 //--------------------------- signup logic ---------------------------
-submit.addEventListener("click", function(event) {
-    event.preventDefault();
+submit.addEventListener("click", function(e) {
+    e.preventDefault();
 
     const email = Semail.value.trim();
     const password = Spass.value.trim();
     const username = usernameInput.value.trim();
 
-    // 🔴 VALIDATION 1: email domain
+    // VALIDATION 1: email domain
     if (!email.endsWith("@klh.edu.in")) {
         alert("Only @klh.edu.in emails are allowed!");
         return;
