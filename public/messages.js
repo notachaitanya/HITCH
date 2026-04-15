@@ -7,7 +7,9 @@ import {
     set,
     get,
     onValue,
-    off
+    onChildAdded,
+    off,
+    update
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 import {
@@ -41,14 +43,8 @@ const otherUserFromPost = params.get("userId");
 //-------------------------------- GET USERNAME ---------------------------
 async function getUsername(uid) {
     if (userCache[uid]) return userCache[uid];
-
     const snapshot = await get(ref(db, "users/" + uid));
-    let name = "Unknown";
-
-    if (snapshot.exists()) {
-        name = snapshot.val().username;
-    }
-
+    let name = snapshot.exists() ? snapshot.val().username : "Unknown";
     userCache[uid] = name;
     return name;
 }
@@ -56,141 +52,95 @@ async function getUsername(uid) {
 //-------------------------------- AUTH ---------------------------
 onAuthStateChanged(auth, (user) => {
     if (!user) return;
-
     currentUserId = user.uid;
-
     setupMessageContainer();
     loadChatList();
-
-    if (otherUserFromPost) {
-        startChatFromPost(otherUserFromPost);
-    }
+    if (otherUserFromPost) startChatFromPost(otherUserFromPost);
 });
 
-//-------------------------------- SETUP MESSAGE BOX ---------------------------
 function setupMessageContainer() {
     const right = document.getElementById("rightPannel");
-
     let msgBox = document.getElementById("chatMessages");
-
     if (!msgBox) {
         msgBox = document.createElement("div");
         msgBox.id = "chatMessages";
-
-        msgBox.style.flex = "1";
-        msgBox.style.overflowY = "auto";
-        msgBox.style.display = "flex";
-        msgBox.style.flexDirection = "column";
-        msgBox.style.padding = "10px";
-
+        msgBox.style.cssText = "flex: 1; overflow-y: auto; display: flex; flex-direction: column; padding: 10px;";
         const inputForm = document.getElementById("chatInputForm");
         right.insertBefore(msgBox, inputForm);
-    }  //---------------------------------------------------------- not needed
+    }
 }
 
 //-------------------------------- CREATE / FIND CHAT ---------------------------
 async function startChatFromPost(otherUserId) {
+    if (currentUserId === otherUserId) return;
 
     const convoRef = ref(db, "conversations");
     const snapshot = await get(convoRef);
-
-    let found = false;
+    let foundId = null;
 
     if (snapshot.exists()) {
         const data = snapshot.val();
-
         for (let id in data) {
             const users = data[id].users;
-
-            if (users[currentUserId] && users[otherUserId]) {
-                conversationId = id;
-                openChatUI(otherUserId);
-                found = true;
+            if (users && users[currentUserId] && users[otherUserId]) {
+                foundId = id;
                 break;
             }
         }
     }
 
-    if (!found) {
-        const newConvo = push(convoRef);
-
-        await set(newConvo, {
-            users: {
-                [currentUserId]: true,
-                [otherUserId]: true
-            }
+    if (foundId) {
+        conversationId = foundId;
+        openChatUI(otherUserId);
+    } else {
+        const newConvoRef = push(convoRef);
+        const now = Date.now();
+        await set(newConvoRef, {
+            users: { [currentUserId]: true, [otherUserId]: true },
+            lastTime: now 
         });
-
-        conversationId = newConvo.key;
+        conversationId = newConvoRef.key;
         openChatUI(otherUserId);
     }
 }
 
-//-------------------------------- LOAD CHAT LIST ---------------------------
+//-------------------------------- LOAD CHAT LIST---------------------------
 async function loadChatList() {
-
     const chatList = document.getElementById("chatList");
-
+    
+   
     onValue(ref(db, "conversations"), async (snapshot) => {
-
         chatList.innerHTML = "";
-
         const data = snapshot.val();
-
         if (!data) {
-            chatList.style.color = "white";
-            chatList.style.marginTop = "20px";
-             chatList.style.marginLeft = "20px";
-            chatList.innerHTML = "No chats yet";
+            chatList.innerHTML = "<div style='color:white; margin:20px;'>No chats yet</div>";
             return;
         }
 
         let convoArray = [];
-
         for (let id in data) {
-            const users = data[id].users;
-
-            if (users[currentUserId]) {
-
-                const otherUser = Object.keys(users).find(
-                    uid => uid !== currentUserId
-                );
-
-                const messagesSnap = await get(ref(db, `messages/${id}`));
-                let lastTime = 0;
-
-                if (messagesSnap.exists()) {
-                    const msgs = Object.values(messagesSnap.val());
-                    lastTime = Math.max(...msgs.map(m => m.timestamp || 0));
-                }
-
+            if (data[id].users && data[id].users[currentUserId]) {
+                const otherUser = Object.keys(data[id].users).find(uid => uid !== currentUserId);
                 convoArray.push({
                     id,
                     otherUser,
-                    lastTime
+                    lastTime: data[id].lastTime || 0
                 });
             }
         }
 
+        
         convoArray.sort((a, b) => b.lastTime - a.lastTime);
 
         for (const chat of convoArray) {
-
             const div = document.createElement("div");
-
-            div.style.padding = "15px";
-            div.style.color = "white";
-            div.style.cursor = "pointer";
-            div.style.borderBottom = "1px solid gray";
-
+            div.style.cssText = "padding: 15px; color: white; cursor: pointer; border-bottom: 1px solid gray;";
             const username = await getUsername(chat.otherUser);
             div.innerText = username;
-
             div.onclick = () => {
                 conversationId = chat.id;
                 openChatUI(chat.otherUser);
             };
-
             chatList.appendChild(div);
         }
     });
@@ -198,33 +148,34 @@ async function loadChatList() {
 
 //-------------------------------- OPEN CHAT ---------------------------
 async function openChatUI(otherUserId) {
-
     const header = document.getElementById("chatUploaderUidDisplay");
-
-    const username = await getUsername(otherUserId);
-    header.innerText = username;
-
+    header.innerText = await getUsername(otherUserId);
+    
+    document.getElementById("chatMessages").innerHTML = "";
     listenMessages();
 }
 
 //-------------------------------- SEND ---------------------------
-document.getElementById("chatInputForm").addEventListener("submit", (e) => {
+document.getElementById("chatInputForm").addEventListener("submit", async (e) => {
     e.preventDefault();
-
-    if (!conversationId) {
-        alert("Open a chat first");
-        return;
-    }
+    if (!conversationId) return;
 
     const input = document.getElementById("messageInput");
     const text = input.value.trim();
-
     if (!text) return;
 
-    push(ref(db, `messages/${conversationId}`), {
+    const now = Date.now();
+    const messageRef = ref(db, `messages/${conversationId}`);
+    
+    // 1. Push the message
+    push(messageRef, {
         senderId: currentUserId,
         text: text,
-        timestamp: Date.now()
+        timestamp: now
+    });
+
+    update(ref(db, `conversations/${conversationId}`), {
+        lastTime: now
     });
 
     input.value = "";
@@ -232,52 +183,31 @@ document.getElementById("chatInputForm").addEventListener("submit", (e) => {
 
 //-------------------------------- RECEIVE ---------------------------
 function listenMessages() {
-
     const container = document.getElementById("chatMessages");
-
     if (!conversationId) return;
 
-    if (currentListener) {
-        off(currentListener);
-    }
+    if (currentListener) off(currentListener);
 
     const messagesRef = ref(db, `messages/${conversationId}`);
     currentListener = messagesRef;
 
-    onValue(messagesRef, async (snapshot) => {
+    onChildAdded(messagesRef, (snapshot) => {
+        const msg = snapshot.val();
+        const div = document.createElement("div");
+        div.style.cssText = "margin: 8px; padding: 10px; border-radius: 10px; max-width: 60%; word-break: break-word;";
 
-        container.innerHTML = "";
-
-        const data = snapshot.val();
-        if (!data) return;
-
-        const messages = Object.values(data)
-            .sort((a, b) => a.timestamp - b.timestamp);
-
-        for (const msg of messages) {
-
-            const div = document.createElement("div");
-
-            div.style.margin = "8px";
-            div.style.padding = "10px";
-            div.style.borderRadius = "10px";
-            div.style.maxWidth = "60%";
-
-            if (msg.senderId === currentUserId) {
-                div.style.background = "purple";
-                div.style.color = "white";
-                div.style.marginLeft = "auto";
-            } else {
-                div.style.background = "#333";
-                div.style.color = "white"; 
-                div.style.marginRight = "auto";
-            }
-
-            div.innerText = msg.text;
-
-            container.appendChild(div);
+        if (msg.senderId === currentUserId) {
+            div.style.background = "purple";
+            div.style.color = "white";
+            div.style.marginLeft = "auto";
+        } else {
+            div.style.background = "#333";
+            div.style.color = "white";
+            div.style.marginRight = "auto";
         }
 
+        div.innerText = msg.text;
+        container.appendChild(div);
         container.scrollTop = container.scrollHeight;
     });
 }
