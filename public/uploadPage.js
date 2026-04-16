@@ -54,7 +54,43 @@ dragdropsection.addEventListener("drop", (e) => {
 //---------------------------------------UPLOAD BUTTON---------------------------
 uploadButton.addEventListener("click", uploadPost);
 
+
 //---------------------------------------UPLOAD FUNCTION---------------------------
+//compression of image 
+function compressImage(file) {
+    return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = (e) => {
+            const img = new Image();
+            img.src = e.target.result;
+            img.onload = () => {
+                const canvas = document.createElement("canvas");
+                
+                // max width 800px
+                const maxWidth = 800;
+                let width = img.width;
+                let height = img.height;
+                
+                if (width > maxWidth) {
+                    height = (maxWidth / width) * height;
+                    width = maxWidth;
+                }
+                
+                canvas.width = width;
+                canvas.height = height;
+                
+                const ctx = canvas.getContext("2d");
+                ctx.drawImage(img, 0, 0, width, height);
+                
+                // 0.7 = 70% quality, good balance
+                canvas.toBlob((blob) => {
+                    resolve(blob);
+                }, "image/jpeg", 0.7);
+            };
+        };
+    });
+}
 async function uploadPost() {
 
     const file = fileInput.files[0];
@@ -84,41 +120,35 @@ async function uploadPost() {
     uploadButton.innerText = "Uploading...";
 
     try {
-        // upload image
-        const storageRef = ref(storage, "images/" + Date.now());
-        const snapshot = await uploadBytes(storageRef, file);
+    const compressedFile = await compressImage(file);
+    const storageRef = ref(storage, "images/" + Date.now());
+    const snapshot = await uploadBytes(storageRef, compressedFile);
+    const url = await getDownloadURL(snapshot.ref);
 
-        // get URL
-        const url = await getDownloadURL(snapshot.ref);
+    await push(dbRef(db, "posts"), {
+        imageURL: url,
+        location: locationValue,
+        category: categoryValue,
+        userId: user.uid,
+        createdAt: Date.now(),
+        status: "active",
+        pointsGiven: false
+    });
 
-        // save to DB
-        await push(dbRef(db, "posts"), {
-            imageURL: url,
-            location: locationValue,
-            category: categoryValue,
-            userId: user.uid,
-            createdAt: Date.now(),
-            status: "active",
-            pointsGiven: false
-        });
+    statusText.innerText = "Uploaded successfully";
+    alert("uploaded successfully!");
+    statusText.style.color = "lightgreen";
+    resetForm();
 
-        // success
-        statusText.innerText = "Uploaded successfully";
-        statusText.style.color = "lightgreen";
+} catch (error) {
+    console.error(error);
+    statusText.innerText = "Upload failed ❌";
+    statusText.style.color = "red";
+}
 
-        resetForm();
 
-    } catch (error) {
-        console.error(error);
-
-        // ❌ error
-        statusText.innerText = "Upload failed ❌";
-        statusText.style.color = "red";
-    }
-
-    // re-enable button
-    uploadButton.disabled = false;
-    uploadButton.innerText = "Upload";
+uploadButton.disabled = false;
+uploadButton.innerText = "Upload";
 }
 
 //---------------------------------------RESET FORM---------------------------
