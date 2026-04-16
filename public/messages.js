@@ -211,3 +211,13 @@ function listenMessages() {
         container.scrollTop = container.scrollHeight;
     });
 }
+
+window.addEventListener("load", () => {
+    const icon = document.getElementById("messageicon");
+
+    console.log("ICON:", icon);
+
+    if (icon) {
+        icon.src = "images/messageSelected.svg";
+    }
+});

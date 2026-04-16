@@ -135,3 +135,12 @@ function resetForm() {
     locationInput.value = "";
     categoryInput.value = "";
 }
+
+window.addEventListener("DOMContentLoaded", () => {
+    const page = window.location.pathname.split("/").pop();
+    const icon = document.getElementById("uploadicon");
+
+    if (page === "uploadPage.html" && icon) {
+        icon.src = "images/plusSelected.svg";
+    }
+});

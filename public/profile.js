@@ -5,7 +5,7 @@ dp.style.backgroundImage ="URL('https://i.pinimg.com/474x/4b/f3/b4/4bf3b4ac72260
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getDatabase, ref, onValue, update, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import { getStorage, ref as storageRef, deleteObject } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
 
 const firebaseConfig = {
@@ -64,3 +64,28 @@ function loadPoints(userId) {
         }
     });
 }
+
+window.addEventListener("DOMContentLoaded", () => {
+    const page = window.location.pathname.split("/").pop();
+    const icon = document.getElementById("profileicon");
+
+    if (page === "profilePage.html" && icon) {
+        icon.src = "images/profileSelected.svg";
+    }
+});
+
+//--------------------logout--------------------
+
+
+const logoutButton = document.getElementById("logoutContainer");
+
+logoutButton.addEventListener("click", () => {
+    signOut(auth)
+        .then(() => {
+            alert("Logged out successfully!");
+            window.location.href = "index.html";
+        })
+        .catch((error) => {
+            console.error("Logout error:", error);
+        });
+});

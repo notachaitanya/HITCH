@@ -190,3 +190,9 @@ searchInput.addEventListener("input", () => {
         displayPosts(filteredPosts);
     }
 });
+
+const page = window.location.pathname.split("/").pop();
+
+if (page === "home.html") {
+    document.getElementById("homeicon").src = "images/homeSelected.svg";
+}

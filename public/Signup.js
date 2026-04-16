@@ -50,6 +50,10 @@ submit.addEventListener("click", function(e) {
         alert("Only @klh.edu.in emails are allowed!");
         return;
     }
+    if(password.length < 6) {
+        alert("Password must be at least 6 characters long!");
+        return;
+    }
 
     //  VALIDATION 2: username empty check
     if (username === "") {
@@ -78,5 +82,13 @@ submit.addEventListener("click", function(e) {
 })
 .catch((error) => {
     console.error("Auth Error:", error);
+
+    if (error.code === "auth/weak-password") {
+        alert("Password must be at least 6 characters!");
+    } else if (error.code === "auth/email-already-in-use") {
+        alert("Email already registered!");
+    } else {
+        alert(error.message);
+    }
 });
 });
