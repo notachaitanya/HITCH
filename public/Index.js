@@ -37,7 +37,7 @@ window.location.href = "home.html";
 })
 
 .catch((error)=>{
-alert("Wrong email or password");
+alert("Wrong email or password / Please signup if you don't have an account");
 console.log(error);
 });
 
