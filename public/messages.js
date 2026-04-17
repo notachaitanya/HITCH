@@ -155,10 +155,16 @@ async function openChatUI(otherUserId) {
     listenMessages();
 }
 
+
+
+
 //-------------------------------- SEND ---------------------------
 document.getElementById("chatInputForm").addEventListener("submit", async (e) => {
     e.preventDefault();
-    if (!conversationId) return;
+     if(!conversationId){
+        showToast("Select a chat first!");
+    };
+
 
     const input = document.getElementById("messageInput");
     const text = input.value.trim();
@@ -221,3 +227,18 @@ window.addEventListener("load", () => {
         icon.src = "images/messageSelected.svg";
     }
 });
+
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    const overlay = document.getElementById("overlay");
+
+    toast.innerText = message;
+
+    toast.classList.add("active");
+    overlay.classList.add("active");
+
+    setTimeout(() => {
+        toast.classList.remove("active");
+        overlay.classList.remove("active");
+    }, 2000); // 3 sec
+}

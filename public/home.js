@@ -139,11 +139,11 @@ async function markAsReturned(postId, post) {
             await deleteObject(imgRef);
         }
 
-        alert("Marked as returned");
+        showToast("Marked as returned! Points added.");
 
     } catch (error) {
         console.error(error);
-        alert("Error updating");
+       showToast("Error marking as returned");
     }
 }
 
@@ -195,4 +195,19 @@ const page = window.location.pathname.split("/").pop();
 
 if (page === "home.html") {
     document.getElementById("homeicon").src = "images/homeSelected.svg";
+}
+
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    const overlay = document.getElementById("overlay");
+
+    toast.innerText = message;
+
+    toast.classList.add("active");
+    overlay.classList.add("active");
+
+    setTimeout(() => {
+        toast.classList.remove("active");
+        overlay.classList.remove("active");
+    }, 2000); // 3 sec
 }

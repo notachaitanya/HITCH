@@ -112,7 +112,7 @@ async function uploadPost() {
         return;
     }
 
-    // 🔥 show uploading instantly
+    
     statusText.innerText = "Uploading...";
     statusText.style.color = "white";
 
@@ -136,7 +136,7 @@ async function uploadPost() {
     });
 
     statusText.innerText = "Uploaded successfully";
-    alert("uploaded successfully!");
+    showToast("Uploaded successfully");
     statusText.style.color = "lightgreen";
     resetForm();
 
@@ -174,3 +174,18 @@ window.addEventListener("DOMContentLoaded", () => {
         icon.src = "images/plusSelected.svg";
     }
 });
+
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    const overlay = document.getElementById("overlay");
+
+    toast.innerText = message;
+
+    toast.classList.add("active");
+    overlay.classList.add("active");
+
+    setTimeout(() => {
+        toast.classList.remove("active");
+        overlay.classList.remove("active");
+    }, 2000); // 1.2 sec
+}
