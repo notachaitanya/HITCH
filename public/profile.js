@@ -82,10 +82,25 @@ const logoutButton = document.getElementById("logoutContainer");
 logoutButton.addEventListener("click", () => {
     signOut(auth)
         .then(() => {
-            alert("Logged out successfully!");
+           showToast("Logged out successfully");
             window.location.href = "index.html";
         })
         .catch((error) => {
-            console.error("Logout error:", error);
+            showToast("Error logging out");
         });
 });
+
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    const overlay = document.getElementById("overlay");
+
+    toast.innerText = message;
+
+    toast.classList.add("active");
+    overlay.classList.add("active");
+
+    setTimeout(() => {
+        toast.classList.remove("active");
+        overlay.classList.remove("active");
+    }, 2000); // 3 sec
+}
